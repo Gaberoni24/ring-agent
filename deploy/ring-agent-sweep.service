@@ -1,0 +1,11 @@
+[Unit]
+Description=Notify about ring captures that never completed
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=ring
+WorkingDirectory=/opt/ring-agent
+EnvironmentFile=/opt/ring-agent/.env
+Environment=DATA_DIR=/opt/ring-agent
+ExecStart=/opt/ring-agent/.venv/bin/python scripts/sweep.py

@@ -1,0 +1,34 @@
+[project]
+name = "ring-agent"
+version = "0.1.0"
+description = "Pebble Index 01 ring webhook -> Claude agent -> TickTick/Notion/Google Calendar"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "anthropic>=0.40",
+    "httpx>=0.27",
+    "pydantic-settings>=2.4",
+    "python-multipart>=0.0.9",
+    "tzdata>=2024.1",
+    "google-auth>=2.30",
+    "requests>=2.31",  # google-auth token refresh transport
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "respx>=0.21",
+]
+google = [
+    # only for scripts/setup_google.py, run once on your laptop
+    "google-auth-oauthlib>=1.2",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.setuptools.packages.find]
+include = ["app*"]

@@ -1,0 +1,31 @@
+# /etc/caddy/Caddyfile
+# deploy.sh (RING_DOMAIN=...) swaps ring.example.com for your hostname.
+# Caddy obtains and renews the TLS cert automatically once DNS points here.
+
+ring.example.com {
+	encode gzip
+
+	log {
+		output file /var/log/caddy/ring-access.log {
+			roll_size 20mb
+			roll_keep 5
+		}
+	}
+
+	# Optional IP rate limiting requires a plugin build:
+	#   caddy add-package github.com/mholt/caddy-ratelimit && systemctl restart caddy
+	# It is left disabled by default because a Caddyfile referencing a missing
+	# plugin prevents Caddy from starting — and receiver uptime is the one
+	# property this system cannot compromise on (the ring never retries).
+	# After installing the plugin, uncomment:
+	# rate_limit {
+	# 	zone webhook {
+	# 		match { path /webhook }
+	# 		key {remote_ip}
+	# 		events 30
+	# 		window 1m
+	# 	}
+	# }
+
+	reverse_proxy 127.0.0.1:8000
+}

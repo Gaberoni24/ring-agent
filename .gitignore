@@ -1,0 +1,45 @@
+# --- Secrets: never commit ---
+.env
+.env.*
+!.env.example
+google_client_secret.json
+client_secret*.json
+google_token.json
+notion_mcp_token.json
+notion_mcp_pending.json
+*token*.json
+*.pem
+*.key
+id_rsa*
+id_ed25519*
+
+# --- Personal settings and per-user state ---
+context/CONTEXT.md
+context/LEARNED.md
+context/notion_map.json
+
+# --- Runtime data ---
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+audio/
+backups/
+*.log
+logs/
+
+# --- Python ---
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+
+# --- Editors / OS ---
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db

@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily (and post-boot) sweep for stuck ring captures
+
+[Timer]
+OnBootSec=5min
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target

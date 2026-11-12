@@ -1,0 +1,5 @@
+# Everything deploys to Linux — keep LF in the working tree too, so
+# rsync'd shell scripts and systemd units are not CRLF-broken.
+* text=auto eol=lf
+*.m4a binary
+*.db binary

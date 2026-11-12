@@ -1,0 +1,25 @@
+[Unit]
+Description=Pebble Index ring agent (webhook receiver + agent worker)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=exec
+User=ring
+Group=ring
+WorkingDirectory=/opt/ring-agent
+EnvironmentFile=/opt/ring-agent/.env
+Environment=DATA_DIR=/opt/ring-agent
+ExecStart=/opt/ring-agent/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=3
+
+# Hardening
+NoNewPrivileges=true
+ProtectSystem=strict
+ReadWritePaths=/opt/ring-agent
+PrivateTmp=true
+UMask=0027
+
+[Install]
+WantedBy=multi-user.target
